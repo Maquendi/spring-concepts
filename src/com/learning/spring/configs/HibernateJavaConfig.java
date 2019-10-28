@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:/resources/application.properties")
+@PropertySource("classpath:resources/application.properties")
 public class HibernateJavaConfig {
 
 	@Autowired
@@ -23,6 +23,7 @@ public class HibernateJavaConfig {
 	
 	@Bean
 	public DataSource datasource() {
+		System.out.println(env.getProperty("dbUrl"));
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(env.getProperty("driverClass"));
 		dataSource.setUrl(env.getProperty("dbUrl"));

@@ -8,5 +8,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-tx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ormLIb"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/dbLib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/common-lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

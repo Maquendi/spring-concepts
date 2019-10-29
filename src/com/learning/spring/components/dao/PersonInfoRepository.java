@@ -1,11 +1,8 @@
 package com.learning.spring.components.dao;
 
 import java.util.List;
-
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +18,9 @@ public class PersonInfoRepository implements EntityRepository<PersonInfo> {
 	private SessionFactory sessionFactory;
 
 	@Override
+	@Transactional
 	public void save(PersonInfo entity) {
-		openSession().save(entity);
+	  currentSession().save(entity);
 	}
 
 	@Override
@@ -30,7 +28,7 @@ public class PersonInfoRepository implements EntityRepository<PersonInfo> {
 	public void deleteById(long entityId) throws ResourceNotFound{
 	  final PersonInfo personInfo = retrieveById(entityId);
 	  if( personInfo != null) {
-		  openSession().delete(personInfo);   
+		  currentSession().delete(personInfo);   
 	    } else {
 	    	throw new ResourceNotFound("unable to delete personInfo with id ==>> " + entityId);
 	    }
@@ -49,14 +47,11 @@ public class PersonInfoRepository implements EntityRepository<PersonInfo> {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public PersonInfo retrieveById(long entityId) throws ResourceNotFound {
 		 PersonInfo personInfo = null;
 		 try {
-				@SuppressWarnings("deprecation")
-				Criteria criteria = openSession().createCriteria(PersonInfo.class);
-				criteria.add(Restrictions.eq("id", entityId));
-				personInfo = (PersonInfo) criteria.uniqueResult();
+				personInfo = currentSession().get(PersonInfo.class, entityId);
 			 
 		 }catch(Exception ex) {
 			throw new ResourceNotFound("unable to delete personInfo with id ==>> " + entityId);
@@ -65,8 +60,8 @@ public class PersonInfoRepository implements EntityRepository<PersonInfo> {
 		return personInfo;
 	}
 	
-	private Session openSession(){
-		return sessionFactory.openSession();
+	private Session currentSession(){
+		return sessionFactory.getCurrentSession();
 	}
 
 }

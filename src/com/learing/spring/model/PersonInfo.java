@@ -17,7 +17,7 @@ public class PersonInfo {
 	
 	private String email;
 	
-	private Address address;
+	//private Address address;
 	
 	private String homePhoneNumber;
 	
@@ -57,13 +57,13 @@ public class PersonInfo {
 		this.email = email;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+//	public Address getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddress(Address address) {
+//		this.address = address;
+//	}
 
 	public String getHomePhoneNumber() {
 		return homePhoneNumber;
